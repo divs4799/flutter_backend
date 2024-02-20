@@ -75,9 +75,15 @@ app.post("/login",async (req,res)=>{
     
     if(createdUser.password == password){
         res.status(200).json({
-            message:"Data has been saved",
+            message:"",
             id:createdUser._id,
-            user:username
+            user:username,
+            email:createdUser.email,
+            phone:createduser.phone,
+            langs:createdUser.languages,
+            imagepath:createdUser.imagePath,
+        
+
         })
     }else{
         res.status(401).json({
