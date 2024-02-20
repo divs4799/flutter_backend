@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const uri="mongodb://localhost:27017/newUser";
+//const uri="mongodb://localhost:27017/newUser";
+const uri = "mongodb+srv://Test:test123@pdf-cluster.obw3a.mongodb.net/?retryWrites=true&w=majority"
 mongoose.connect(uri).then((result)=>{console.log("DB Connected")}).catch((err)=>{console.log(err)});
 
 const UserSchema  = new mongoose.Schema({
