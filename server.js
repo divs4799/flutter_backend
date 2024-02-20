@@ -82,8 +82,8 @@ app.post("/login",async (req,res)=>{
             phone:createduser.phone,
             langs:createdUser.languages,
             imagepath:createdUser.imagePath,
-        
-
+            gender:createdUser.gender
+    
         })
     }else{
         res.status(401).json({
