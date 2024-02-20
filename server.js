@@ -65,11 +65,14 @@ app.post("/login",async (req,res)=>{
     const {username,password} = req.body;
     console.log(password);
     var createdUser = await UserProfile.findOne({username:username});
-    if(createdUser=={}||createdUser == null){
+    if(createdUser == null){
         res.status(400).json({
             message:"No User found with this Username."
         });
     }
+    try{
+
+    
     if(createdUser.password == password){
         res.status(200).json({
             message:"Data has been saved",
@@ -81,7 +84,12 @@ app.post("/login",async (req,res)=>{
             message:"The password given is incorrect."
         });
     }
-    
+}catch(err){
+    console.log(err);
+    res.status(400).json({
+        message:"No User found with this Username"
+    })
+}
 });
 
 
