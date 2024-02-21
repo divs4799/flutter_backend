@@ -74,12 +74,13 @@ app.post("/login",async (req,res)=>{
 
     
     if(createdUser.password == password){
+
         res.status(200).json({
             message:"",
             id:createdUser._id,
             user:username,
             email:createdUser.email,
-            phone:createduser.phone,
+            phone:createdUser.phone,
             langs:createdUser.languages,
             imagepath:createdUser.imagePath,
             gender:createdUser.gender
