@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 //const uri="mongodb://localhost:27017/newUser";
 const uri = "mongodb+srv://Test:test123@pdf-cluster.obw3a.mongodb.net/?retryWrites=true&w=majority"
-mongoose.connect(uri).then((result)=>{console.log("DB Connected")}).catch((err)=>{console.log(err)});
+mongoose.connect(uri).then((result)=>{console.log("DB Connected")}).catch((err)=>{console.log("Error in connection :"+err)});
 
 const UserSchema  = new mongoose.Schema({
     username:String,
@@ -63,8 +63,13 @@ app.post('/getdata', (req,res) => {
 app.post("/login",async (req,res)=>{
     console.log(req.body);
     const {username,password} = req.body;
-    console.log(password);
-    var createdUser = await UserProfile.findOne({username:username});
+     var createdUser;   
+    
+    if(username!=""&& password!=""){
+    createdUser = await UserProfile.findOne({username:username});
+    console.log(" User :",createdUser);
+
+    }
     if(createdUser == null){
         res.status(400).json({
             message:"No User found with this Username."
@@ -72,9 +77,7 @@ app.post("/login",async (req,res)=>{
     }
     try{
 
-    
     if(createdUser.password == password){
-
         res.status(200).json({
             message:"",
             id:createdUser._id,
